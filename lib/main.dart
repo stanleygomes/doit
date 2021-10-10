@@ -10,11 +10,11 @@ main() {
 class RootWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bom dia',
+      title: 'Hello World',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeWidget('Hello'),
+      home: HomeWidget(title: 'Hello'),
     );
   }
 }

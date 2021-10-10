@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class HomeWidget extends StatefulWidget {
   final String title;
 
-  HomeWidget(this.title);
+  HomeWidget({Key? key, required this.title});
 
   @override
   _HomeState createState() => _HomeState();

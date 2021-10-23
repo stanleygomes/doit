@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './screens/splash.dart';
 import './screens/error404.dart';
-import 'utils/theme.dart';
+import 'config/theme.dart';
 import 'config/routes.dart';
 
 main() {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-import './widgets/home.dart';
+import './screens/splash.dart';
+import './screens/error404.dart';
+import 'utils/theme.dart';
+import 'config/routes.dart';
 
 main() {
   runApp(RootWidget());
@@ -10,11 +12,17 @@ main() {
 class RootWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hello World',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeWidget(title: 'Hello'),
+      title: 'Do it!',
+      debugShowCheckedModeBanner: false,
+      theme: appTheme(),
+      routes: routes,
+      initialRoute: SplashScreen.routeName,
+      onUnknownRoute: (RouteSettings settings) {
+        return MaterialPageRoute<void>(
+          settings: settings,
+          builder: (BuildContext context) => Error404Screen(),
+        );
+      },
     );
   }
 }

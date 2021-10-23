@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:doit/components/Button.dart';
 import 'package:doit/components/Spacing.dart';
 import 'package:doit/components/Typography.dart';
@@ -9,6 +10,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -22,12 +25,12 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             H1(
-              label: 'Do it!',
+              label: t.appName,
             ),
             CustomPadding(
               value: 10,
               child: Paragraph(
-                label: 'A todo app for everything.',
+                label: t.slogan,
               ),
             ),
             CustomPadding(
@@ -38,14 +41,14 @@ class SplashScreen extends StatelessWidget {
                     value: 15,
                     child: Button(
                       type: 'elevated',
-                      label: 'Login com google',
+                      label: t.loginWithGoogle,
                       huge: true,
                       onPressed: () {},
                     ),
                   ),
                   Button(
                     type: 'outlined',
-                    label: 'Pular',
+                    label: t.notNow,
                     huge: true,
                     onPressed: () {},
                   ),

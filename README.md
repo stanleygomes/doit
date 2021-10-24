@@ -9,9 +9,8 @@ Table of contents
  1. [How to get Started](#startup)
  2. [Gitflow recommendations](#gitflow)
  3. [Patterns and libs](#patterns)
- 4. [Samples and tutorials of use](#tutorials)
- 5. [Project structure](#projetcstructure)
- 6. [Licence](#license)
+ 4. [Project structure](#projetcstructure)
+ 5. [Licence](#license)
 *******
 
 <div id='requirements'/>
@@ -70,15 +69,6 @@ Working on...
 - Test: ????
 - Http Request: ????
 - Authentication: ????
-
-<div id='tutorials'/>
-
-## :books: Tutorials
-
-Some useful tutorials to improve nodevader's features:
-
-- Main features: [check here](https://from-tatooine.web.app/nodevader-first-release/)
-- Deploy to firebase functions: [check here](https://from-tatooine.web.app/deploy-nodejs-firebase)
 
 <div id='projetcstructure'/>
 

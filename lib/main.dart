@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import './screens/splash.dart';
-import './screens/error404.dart';
-import 'config/theme.dart';
-import 'config/routes.dart';
+import 'package:doit/screens/splash.dart';
+import 'package:doit/screens/error404.dart';
+import 'package:doit/config/theme.dart';
+import 'package:doit/config/routes.dart';
 
 main() {
   runApp(RootWidget());
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.white,
-    statusBarColor: Colors.white,
-  ));
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   systemNavigationBarColor: Colors.white,
+  //   statusBarColor: Colors.white,
+  // ));
 }
 
 class RootWidget extends StatelessWidget {

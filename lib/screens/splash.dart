@@ -1,12 +1,20 @@
+import 'package:doit/services/auth.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:doit/components/Button.dart';
 import 'package:doit/components/Spacing.dart';
 import 'package:doit/components/Typography.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SplashScreen extends StatelessWidget {
   static String routeName = 'splash';
+
+  _incrementCounter() async {
+    Auth auth = new Auth();
+    await auth.create();
+    await auth.getUser();
+    await auth.didCompletedIntro();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +58,7 @@ class SplashScreen extends StatelessWidget {
                     type: 'outlined',
                     label: t.notNow,
                     huge: true,
-                    onPressed: () {},
+                    onPressed: _incrementCounter,
                   ),
                 ],
               ),

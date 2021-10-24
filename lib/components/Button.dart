@@ -55,7 +55,7 @@ class Button extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(label),
       );
     }

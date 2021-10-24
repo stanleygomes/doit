@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'package:doit/config/constants.dart';
 
 final Color colorSchemePrimary = Colors.green.shade500;
 final Color colorSchemePrimaryLight = Colors.green.shade200;

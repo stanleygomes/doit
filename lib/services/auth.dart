@@ -5,16 +5,17 @@ import 'package:doit/services/local_storage.dart';
 class Auth {
   LocalStorageService _localStorageService = new LocalStorageService('auth');
 
-  Future<User> create() async {
-    var user = User(
-      id: 1,
-      name: 'Fulano',
-    );
+  Future<void> create(User? user) async {
+    if (user != null) {
+      this.createUser(user);
+    }
 
-    String jsonUser = jsonEncode(user);
-
-    await this._localStorageService.setItem('user', jsonUser);
     await this._localStorageService.setItem('completedIntro', 'true');
+  }
+
+  Future<User> createUser(User user) async {
+    String jsonUser = jsonEncode(user);
+    await this._localStorageService.setItem('user', jsonUser);
 
     return user;
   }

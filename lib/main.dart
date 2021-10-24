@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './screens/splash.dart';
@@ -8,6 +9,10 @@ import 'config/routes.dart';
 
 main() {
   runApp(RootWidget());
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.white,
+    statusBarColor: Colors.white,
+  ));
 }
 
 class RootWidget extends StatelessWidget {

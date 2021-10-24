@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
             CustomPadding(
               value: 30,
               child: Image(
-                image: AssetImage('images/app-icon.png'),
+                image: AssetImage('assets/images/app-icon.png'),
                 width: 100,
               ),
             ),

@@ -1,4 +1,4 @@
-package com.example.example
+package com.stanley.doit
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -6,7 +6,7 @@ class Button extends StatelessWidget {
   final String type;
   final String label;
   final bool? huge;
-  final Function() onPressed;
+  final Function()? onPressed;
 
   Button({
     Key? key,

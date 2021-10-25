@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "300911515231",
+    "project_id": "do-it-todo-app",
+    "storage_bucket": "do-it-todo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300911515231:android:059081ad984580792b6dea",
+        "android_client_info": {
+          "package_name": "com.stanley.doit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300911515231-tii5j0tia2ng06vf68o3pd29bevdciej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stanley.doit",
+            "certificate_hash": "566ed62d6ec92c1fe63353945719fa957428aa47"
+          }
+        },
+        {
+          "client_id": "300911515231-5j0qmssgmls8r7cacldumfrb0muh02nj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBK7ytctvmQuvwB7hPpAGX0G4SNtNAIhVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300911515231-5j0qmssgmls8r7cacldumfrb0muh02nj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

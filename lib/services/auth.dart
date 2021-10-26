@@ -26,7 +26,10 @@ class Auth {
 
     return User(
       id: jsonUser['id'],
-      name: jsonUser['name'],
+      serverAuthCode: jsonUser['serverAuthCode'],
+      email: jsonUser['email'],
+      displayName: jsonUser['displayName'],
+      photoUrl: jsonUser['photoUrl'],
     );
   }
 

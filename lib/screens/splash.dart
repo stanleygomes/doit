@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:doit/models/user.dart';
+import 'package:doit/models/user.dart' as UserModel;
 import 'package:doit/services/auth.dart';
 import 'package:doit/components/Button.dart';
+import 'package:doit/components/CDialog.dart';
 import 'package:doit/components/Spacing.dart';
 import 'package:doit/components/Typography.dart';
 import 'package:doit/services/firebase.dart';
@@ -34,45 +34,30 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _loginWithGoogle() async {
-    // this._disableButtons();
-    // Auth auth = new Auth();
+    this._disableButtons();
 
-    print('counter 1');
-
+    Auth auth = new Auth();
     FirebaseService service = new FirebaseService();
 
     try {
-      await service.signInwithGoogle();
-      print('teste 2');
+      var googleUser = await service.signInwithGoogle();
+      var user = UserModel.User(
+        id: googleUser?.id,
+        displayName: googleUser?.displayName,
+        email: googleUser?.email,
+        photoUrl: googleUser?.photoUrl,
+        serverAuthCode: googleUser?.serverAuthCode,
+      );
+
+      await auth.create(user);
+
+      this._enableButtons();
       // Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } catch (e) {
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
-      // TRATAR O ERRO AQUI MOSTRANDO UMA MENSAGEM NA TELA
+      print('mensagem de erro aqui');
       print(e);
-      if (e is FirebaseAuthException) {
-        print(e.toString());
-        // showMessage(e.message!);
-        print('teste 2');
-      }
+      CDialog.showOkDialog(context, 'Ops', 'Ocorreu um erro ao efetuar login.');
     }
-
-    // var user = User(
-    //   id: 1,
-    //   name: 'Fulano',
-    // );
-
-    // await auth.create(null);
   }
 
   _skipLogin() async {
@@ -80,6 +65,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Auth auth = new Auth();
     await auth.create(null);
+
+    this._enableButtons();
   }
 
   @override

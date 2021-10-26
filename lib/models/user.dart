@@ -1,21 +1,33 @@
 class User {
-  late int id;
-  late String name;
+  late String? id;
+  late String? serverAuthCode;
+  late String? email;
+  late String? displayName;
+  late String? photoUrl;
 
   User({
     required this.id,
-    required this.name,
+    required this.serverAuthCode,
+    required this.email,
+    required this.displayName,
+    required this.photoUrl,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'serverAuthCode': serverAuthCode,
+      'email': email,
+      'displayName': displayName,
+      'photoUrl': photoUrl,
     };
   }
 
   fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
-    this.name = json['name'];
+    this.serverAuthCode = json['serverAuthCode'];
+    this.email = json['email'];
+    this.displayName = json['displayName'];
+    this.photoUrl = json['photoUrl'];
   }
 }

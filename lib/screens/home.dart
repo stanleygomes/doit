@@ -1,78 +1,52 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
-// import 'screens/home.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/widgets.dart';
+import 'package:doit/models/user.dart' as UserModel;
+import 'package:doit/services/auth.dart';
+import 'package:doit/components/Button.dart';
+import 'package:doit/components/CDialog.dart';
+import 'package:doit/components/Spacing.dart';
+import 'package:doit/components/Typography.dart';
+import 'package:doit/services/firebase.dart';
 
-// main() {
-//   runApp(RootWidget());
-// }
+class Home extends StatefulWidget {
+  static String routeName = 'home';
 
-// class RootWidget extends StatelessWidget {
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Hello World',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: HomeWidget(title: 'Hello'),
-//     );
-//   }
-// }
+  Home();
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-// class HomeWidget extends StatefulWidget {
-//   final String title;
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
 
-//   HomeWidget({Key? key, required this.title});
-
-//   @override
-//   _HomeState createState() => _HomeState();
-// }
-
-// class _HomeState extends State<HomeWidget> {
-//   int _counter = 0;
-
-//   void _incrementCounter() {
-//     setState(() {
-//       _counter++;
-//     });
-//   }
-
-//   Widget build(BuildContext buildContext) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         // title: Text('$_counter vez clicado'),
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         child: Column(
-//           children: <Widget>[
-//             Container(
-//               width: double.infinity,
-//               margin: EdgeInsets.all(20),
-//               child: Text(
-//                 '$_counter foi clicado',
-//                 style: TextStyle(
-//                   fontSize: 30,
-//                 ),
-//                 textAlign: TextAlign.center,
-//               ),
-//             ),
-//             Container(
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [Text('teste')],
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         tooltip: 'Ola',
-//         onPressed: _incrementCounter,
-//         child: Icon(Icons.add),
-//       ),
-//     );
-//   }
-// }
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomPadding(
+              value: 30,
+              child: Image(
+                image: AssetImage('assets/images/app-icon.png'),
+                width: 100,
+              ),
+            ),
+            H1(
+              label: 'home',
+            ),
+            CustomPadding(
+              value: 10,
+              child: Paragraph(
+                label: t.slogan,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

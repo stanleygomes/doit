@@ -75,49 +75,51 @@ class _SplashScreenState extends State<SplashScreen> {
     var t = AppLocalizations.of(context)!;
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomPadding(
-              value: 30,
-              child: Image(
-                image: AssetImage('assets/images/app-icon.png'),
-                width: 100,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomPadding(
+                value: 30,
+                child: Image(
+                  image: AssetImage('assets/images/app-icon.png'),
+                  width: 100,
+                ),
               ),
-            ),
-            H1(
-              label: t.appName,
-            ),
-            CustomPadding(
-              value: 10,
-              child: Paragraph(
-                label: t.slogan,
+              H1(
+                label: t.appName,
               ),
-            ),
-            CustomPadding(
-              value: 30,
-              child: Column(
-                children: [
-                  CustomPadding(
-                    value: 15,
-                    child: Button(
-                      type: 'elevated',
-                      label: t.loginWithGoogle,
-                      huge: true,
-                      onPressed: _isDisabledButtons ? null : _loginWithGoogle,
+              CustomPadding(
+                value: 10,
+                child: Paragraph(
+                  label: t.slogan,
+                ),
+              ),
+              CustomPadding(
+                value: 30,
+                child: Column(
+                  children: [
+                    CustomPadding(
+                      value: 15,
+                      child: Button(
+                        type: 'elevated',
+                        label: t.loginWithGoogle,
+                        huge: true,
+                        onPressed: _isDisabledButtons ? null : _loginWithGoogle,
+                      ),
                     ),
-                  ),
-                  Button(
-                    type: 'outlined',
-                    label: t.notNow,
-                    huge: true,
-                    onPressed: _isDisabledButtons ? null : _skipLogin,
-                  ),
-                ],
+                    Button(
+                      type: 'outlined',
+                      label: t.notNow,
+                      huge: true,
+                      onPressed: _isDisabledButtons ? null : _skipLogin,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

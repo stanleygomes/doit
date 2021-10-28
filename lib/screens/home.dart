@@ -1,3 +1,5 @@
+import 'package:doit/components/Fab.dart';
+import 'package:doit/components/custom/TopBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -19,28 +21,23 @@ class _HomeScreenState extends State<HomeScreen> {
     var t = AppLocalizations.of(context)!;
 
     return Scaffold(
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomPadding(
-              value: 30,
-              child: Image(
-                image: AssetImage('assets/images/app-icon.png'),
-                width: 100,
-              ),
+            TopBar(
+              title: 'Hello, Stanley!',
+              imageUrl:
+                  'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9',
             ),
-            H1(
-              label: 'home',
-            ),
-            CustomPadding(
-              value: 10,
-              child: Paragraph(
-                label: t.slogan,
-              ),
-            ),
+            H1(label: 'Work in progress...'),
+            H1(label: '')
           ],
         ),
+      ),
+      floatingActionButton: Fab(
+        tooltip: 'tooltip',
+        onPressed: () {},
       ),
     );
   }

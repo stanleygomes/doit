@@ -3,6 +3,7 @@ import 'package:doit/models/user.dart';
 import 'package:doit/services/local_storage.dart';
 
 class Auth {
+  final String completedIntroKey = 'completedIntro';
   LocalStorageService _localStorageService = new LocalStorageService('auth');
 
   Future<void> create(User? user) async {
@@ -10,7 +11,7 @@ class Auth {
       await this.createUser(user);
     }
 
-    await this._localStorageService.setItem('completedIntro', 'true');
+    await this._localStorageService.setItem(completedIntroKey, 'true');
   }
 
   Future<User> createUser(User user) async {
@@ -35,7 +36,7 @@ class Auth {
 
   Future<bool> didCompletedIntro() async {
     dynamic stringConfig =
-        await this._localStorageService.getItem('completedIntro');
+        await this._localStorageService.getItem(completedIntroKey);
     if (stringConfig == null) {
       return false;
     }

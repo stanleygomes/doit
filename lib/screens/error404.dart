@@ -12,7 +12,7 @@ class Error404Screen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image(
-            image: AssetImage('images/app-error.png'),
+            image: AssetImage('assets/images/app-error.png'),
             width: 100,
           ),
           Padding(

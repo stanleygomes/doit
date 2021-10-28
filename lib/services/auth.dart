@@ -7,7 +7,7 @@ class Auth {
 
   Future<void> create(User? user) async {
     if (user != null) {
-      this.createUser(user);
+      await this.createUser(user);
     }
 
     await this._localStorageService.setItem('completedIntro', 'true');
@@ -34,10 +34,13 @@ class Auth {
   }
 
   Future<bool> didCompletedIntro() async {
-    var stringConfig =
+    dynamic stringConfig =
         await this._localStorageService.getItem('completedIntro');
-    var jsonConfig = jsonDecode(stringConfig);
+    if (stringConfig == null) {
+      return false;
+    }
 
+    var jsonConfig = jsonDecode(stringConfig);
     return jsonConfig;
   }
 }

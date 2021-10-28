@@ -5,13 +5,13 @@ class LocalStorageService {
 
   LocalStorageService(String storageKey) : _storage = LocalStorage(storageKey);
 
-  Future getItem(String key) async {
+  Future<dynamic> getItem(String key) async {
     await _storage.ready;
     return _storage.getItem(key);
   }
 
   Future<void> setItem(String key, dynamic value) async {
     await _storage.ready;
-    return _storage.setItem(key, value);
+    await _storage.setItem(key, value);
   }
 }

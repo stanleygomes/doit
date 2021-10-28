@@ -4,5 +4,5 @@ import 'package:doit/screens/home.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
-  Home.routeName: (context) => Home(),
+  HomeScreen.routeName: (context) => HomeScreen(),
 };

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:doit/models/user.dart' as UserModel;
 import 'package:doit/services/auth.dart';
+import 'package:doit/components/CNavigator.dart';
 import 'package:doit/components/Button.dart';
 import 'package:doit/components/CDialog.dart';
 import 'package:doit/components/Spacing.dart';
@@ -50,9 +51,9 @@ class _SplashScreenState extends State<SplashScreen> {
       );
 
       await auth.create(user);
-
       this._enableButtons();
-      // Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+
+      CNavigator.replace(context, 'home');
     } catch (e) {
       print('mensagem de erro aqui');
       print(e);

@@ -2,5 +2,6 @@
   "appName": "Do it!",
   "slogan": "A todo app for everything.",
   "loginWithGoogle": "Login with Google",
-  "notNow": "Not now"
+  "notNow": "Not now",
+  "hello": "Hello"
 }

@@ -1,11 +1,11 @@
-class User {
+class UserModel {
   late String? id;
   late String? serverAuthCode;
   late String? email;
   late String? displayName;
   late String? photoUrl;
 
-  User({
+  UserModel({
     required this.id,
     required this.serverAuthCode,
     required this.email,

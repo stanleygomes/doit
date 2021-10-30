@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -9,6 +10,8 @@ import 'package:doit/screens/home.dart';
 import 'package:doit/screens/error404.dart';
 import 'package:doit/config/theme.dart';
 import 'package:doit/config/routes.dart';
+import 'package:doit/models/auth.dart';
+import 'package:doit/models/user.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,11 +19,13 @@ main() async {
 
   Auth auth = Auth();
   bool completedIntro = await auth.didCompletedIntro();
+  UserModel user = await auth.getUser();
   String initialRoute =
       completedIntro ? HomeScreen.routeName : SplashScreen.routeName;
 
   runApp(RootWidget(
     initialRoute: initialRoute,
+    user: user,
   ));
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -32,26 +37,44 @@ main() async {
 
 class RootWidget extends StatelessWidget {
   final String initialRoute;
+  final UserModel? user;
 
   RootWidget({
     required this.initialRoute,
+    required this.user,
   });
 
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Do it!',
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      theme: appTheme(),
-      routes: routes,
-      initialRoute: this.initialRoute,
-      onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute<void>(
-          settings: settings,
-          builder: (BuildContext context) => Error404Screen(),
-        );
-      },
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => AuthModel()),
+        ChangeNotifierProxyProvider0<AuthModel>(
+          create: (context) {
+            var authModel = new AuthModel();
+            authModel.user = this.user;
+
+            return authModel;
+          },
+          update: (context, auth) {
+            return auth!;
+          },
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Do it!',
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        theme: appTheme(),
+        routes: routes,
+        initialRoute: this.initialRoute,
+        onUnknownRoute: (RouteSettings settings) {
+          return MaterialPageRoute<void>(
+            settings: settings,
+            builder: (BuildContext context) => Error404Screen(),
+          );
+        },
+      ),
     );
   }
 }

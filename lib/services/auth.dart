@@ -6,7 +6,7 @@ class Auth {
   final String completedIntroKey = 'completedIntro';
   LocalStorageService _localStorageService = new LocalStorageService('auth');
 
-  Future<void> create(User? user) async {
+  Future<void> create(UserModel? user) async {
     if (user != null) {
       await this.createUser(user);
     }
@@ -14,18 +14,18 @@ class Auth {
     await this._localStorageService.setItem(completedIntroKey, 'true');
   }
 
-  Future<User> createUser(User user) async {
+  Future<UserModel> createUser(UserModel user) async {
     String jsonUser = jsonEncode(user);
     await this._localStorageService.setItem('user', jsonUser);
 
     return user;
   }
 
-  Future<User> getUser() async {
+  Future<UserModel> getUser() async {
     var stringUser = await this._localStorageService.getItem('user');
     var jsonUser = jsonDecode(stringUser);
 
-    return User(
+    return UserModel(
       id: jsonUser['id'],
       serverAuthCode: jsonUser['serverAuthCode'],
       email: jsonUser['email'],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
-import 'package:doit/models/user.dart' as UserModel;
+import 'package:doit/models/user.dart';
 import 'package:doit/services/auth.dart';
 import 'package:doit/components/CNavigator.dart';
 import 'package:doit/components/Button.dart';
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     try {
       var googleUser = await service.signInwithGoogle();
-      var user = UserModel.User(
+      var user = UserModel(
         id: googleUser?.id,
         displayName: googleUser?.displayName,
         email: googleUser?.email,
@@ -55,7 +55,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
       CNavigator.replace(context, 'home');
     } catch (e) {
-      print('mensagem de erro aqui');
       print(e);
       CDialog.showOkDialog(context, 'Ops', 'Ocorreu um erro ao efetuar login.');
     }

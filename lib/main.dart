@@ -19,7 +19,7 @@ main() async {
 
   Auth auth = Auth();
   bool completedIntro = await auth.didCompletedIntro();
-  UserModel user = await auth.getUser();
+  UserModel? user = await auth.getUser();
   String initialRoute =
       completedIntro ? HomeScreen.routeName : SplashScreen.routeName;
 

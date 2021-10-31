@@ -67,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onPressed: _shareApp,
                 ),
                 ButtonListItem(
-                  text: t.signOut,
+                  text: user == null ? t.goToLogin : t.signOut,
                   onPressed: _signOut,
                 ),
               ],

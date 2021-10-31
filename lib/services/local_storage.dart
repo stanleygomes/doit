@@ -17,6 +17,6 @@ class LocalStorageService {
 
   Future<void> removeItem(String key) async {
     await _storage.ready;
-    await _storage.setItem(key, null);
+    await _storage.deleteItem(key);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:doit/models/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -9,6 +10,7 @@ import 'package:doit/components/CDialog.dart';
 import 'package:doit/components/Spacing.dart';
 import 'package:doit/components/Typography.dart';
 import 'package:doit/services/firebase.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = 'splash';
@@ -51,8 +53,11 @@ class _SplashScreenState extends State<SplashScreen> {
       );
 
       await auth.create(user);
-      this._enableButtons();
 
+      final authContext = Provider.of<AuthModel>(context, listen: false);
+      authContext.user = user;
+
+      this._enableButtons();
       CNavigator.replace(context, 'home');
     } catch (e) {
       print(e);
@@ -67,11 +72,13 @@ class _SplashScreenState extends State<SplashScreen> {
     await auth.create(null);
 
     this._enableButtons();
+    CNavigator.replace(context, 'home');
   }
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+    // var authContext = context.watch<AuthModel>();
 
     return Scaffold(
       body: SafeArea(

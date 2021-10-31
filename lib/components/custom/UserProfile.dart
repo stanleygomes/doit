@@ -42,7 +42,7 @@ class UserProfile extends StatelessWidget {
             child: H1(label: this.name != null ? this.name! : t.goToLogin),
           ),
           Paragraph(
-            label: this.email!,
+            label: this.email != null ? this.email! : '',
           ),
         ],
       ),

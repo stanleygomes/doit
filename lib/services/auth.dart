@@ -21,8 +21,13 @@ class Auth {
     return user;
   }
 
-  Future<UserModel> getUser() async {
+  Future<UserModel?> getUser() async {
     var stringUser = await this._localStorageService.getItem('user');
+
+    if (stringUser == null) {
+      return null;
+    }
+
     var jsonUser = jsonDecode(stringUser);
 
     return UserModel(

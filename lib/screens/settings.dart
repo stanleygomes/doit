@@ -1,3 +1,4 @@
+import 'package:doit/services/auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,12 +28,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
     var user = auth.user;
 
     _shareApp() {
-      Share.share('''${t.shareAppMessage}
+      Share.share(
+        '''${t.shareAppMessage}
 
-        $playStoreUrl''');
+        $playStoreUrl''',
+      );
     }
 
-    _signOut() {}
+    _signOut() async {
+      Auth auth = new Auth();
+      await auth.signOut();
+      CNavigator.stack(context, 'splash');
+    }
 
     _goToPrivacy() {
       CNavigator.stack(context, 'privacy');

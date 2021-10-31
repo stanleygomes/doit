@@ -44,4 +44,9 @@ class Auth {
     var jsonConfig = jsonDecode(stringConfig);
     return jsonConfig;
   }
+
+  Future<void> signOut() async {
+    await this._localStorageService.removeItem(completedIntroKey);
+    await this._localStorageService.removeItem('user');
+  }
 }

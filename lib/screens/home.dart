@@ -1,6 +1,6 @@
 import 'package:doit/services/string_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:doit/components/Fab.dart';
@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var t = AppLocalizations.of(context)!;
+    // var t = AppLocalizations.of(context)!;
     var auth = context.watch<AuthModel>();
     var user = auth.user;
     var userFistName = StringUtil.getFirstName(user?.displayName);
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               imageUrl: user?.photoUrl,
             ),
             H1(label: 'Work in progress...'),
-            H1(label: '')
+            H1(label: ''),
           ],
         ),
       ),

@@ -1,49 +1,48 @@
-import 'package:doit/components/CNavigator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:doit/components/Spacing.dart';
 import 'package:doit/components/CAvatar.dart';
 import 'package:doit/components/Typography.dart';
 
-class TopBar extends StatelessWidget {
-  final String? title;
+class UserProfile extends StatelessWidget {
+  final String? name;
+  final String? email;
   final String? imageUrl;
 
-  TopBar({
+  UserProfile({
     Key? key,
-    required this.title,
+    required this.name,
+    required this.email,
     required this.imageUrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    String hello = this.title != null ? '${t.hello}, ${this.title}' : t.hello;
     var imageFile;
 
     if (this.imageUrl == null) {
       imageFile = 'assets/images/avatar-placement.jpg';
     }
 
-    _goToSettings() {
-      CNavigator.stack(context, 'settings');
-    }
-
     return Container(
+      width: double.infinity,
       padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          H1(
-            label: hello,
+          CAvatar(
+            imageUrl: this.imageUrl,
+            imageFile: imageFile,
+            size: 50,
           ),
-          InkWell(
-            onTap: _goToSettings,
-            child: CAvatar(
-              imageUrl: this.imageUrl,
-              imageFile: imageFile,
-              size: 25,
-            ),
+          CustomPadding(
+            value: 10,
+            child: H1(label: this.name != null ? this.name! : t.goToLogin),
+          ),
+          Paragraph(
+            label: this.email!,
           ),
         ],
       ),

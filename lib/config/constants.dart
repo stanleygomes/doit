@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const playStoreUrl =
+    'https://play.google.com/store/apps/details?id=com.doit.app';
+
 const kPrimaryColor = Color(0xFFFF7643);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(

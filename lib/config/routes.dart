@@ -1,3 +1,4 @@
+import 'package:doit/screens/goals.dart';
 import 'package:flutter/widgets.dart';
 import 'package:doit/screens/privacy.dart';
 import 'package:doit/screens/settings.dart';
@@ -9,4 +10,5 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => HomeScreen(),
   SettingsScreen.routeName: (context) => SettingsScreen(),
   PrivacyScreen.routeName: (context) => PrivacyScreen(),
+  GoalsScreen.routeName: (context) => GoalsScreen(),
 };

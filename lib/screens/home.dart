@@ -1,3 +1,4 @@
+import 'package:doit/components/CNavigator.dart';
 import 'package:doit/services/string_util.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -41,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: Fab(
         tooltip: 'tooltip',
-        onPressed: () {},
+        onPressed: () {
+          CNavigator.stack(context, 'goals');
+        },
       ),
     );
   }

@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
-import 'package:doit/components/AppBarBack.dart';
-import 'package:doit/components/CNavigator.dart';
-import 'package:doit/components/ButtonList.dart';
-import 'package:doit/components/custom/UserProfile.dart';
+import 'package:doit/components/app_bar_back.dart';
+import 'package:doit/components/navigator.dart';
+import 'package:doit/components/button_list.dart';
+import 'package:doit/components/custom/user_profile.dart';
 import 'package:doit/models/auth.dart';
 import 'package:doit/config/constants.dart';
 

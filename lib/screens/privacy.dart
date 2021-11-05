@@ -1,6 +1,6 @@
-import 'package:doit/components/AppBarBack.dart';
-import 'package:doit/components/Spacing.dart';
-import 'package:doit/components/Typography.dart';
+import 'package:doit/components/app_bar_back.dart';
+import 'package:doit/components/spacing.dart';
+import 'package:doit/components/typography.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

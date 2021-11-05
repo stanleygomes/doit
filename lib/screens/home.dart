@@ -1,14 +1,14 @@
-import 'package:doit/components/CNavigator.dart';
+import 'package:doit/components/navigator.dart';
 import 'package:doit/screens/goals.dart';
 import 'package:doit/services/string_util.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:doit/components/Fab.dart';
-import 'package:doit/components/custom/TopBar.dart';
+import 'package:doit/components/fab.dart';
+import 'package:doit/components/custom/top_bar.dart';
 import 'package:doit/models/auth.dart';
-import 'package:doit/components/Typography.dart';
+import 'package:doit/components/typography.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = 'home';

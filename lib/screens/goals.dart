@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:doit/components/AppBarBack.dart';
-import 'package:doit/components/CNavigator.dart';
-import 'package:doit/components/CardBasicText.dart';
-import 'package:doit/components/Fab.dart';
+import 'package:doit/components/app_bar_back.dart';
+import 'package:doit/components/navigator.dart';
+import 'package:doit/components/card_basic_text.dart';
+import 'package:doit/components/fab.dart';
 import 'package:doit/models/auth.dart';
 
 class GoalsScreen extends StatefulWidget {

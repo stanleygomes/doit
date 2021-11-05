@@ -5,11 +5,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:doit/models/user.dart';
 import 'package:doit/services/auth.dart';
-import 'package:doit/components/CNavigator.dart';
-import 'package:doit/components/Button.dart';
-import 'package:doit/components/CDialog.dart';
-import 'package:doit/components/Spacing.dart';
-import 'package:doit/components/Typography.dart';
+import 'package:doit/components/navigator.dart';
+import 'package:doit/components/button.dart';
+import 'package:doit/components/dialog.dart';
+import 'package:doit/components/spacing.dart';
+import 'package:doit/components/typography.dart';
 import 'package:doit/services/firebase.dart';
 import 'package:provider/provider.dart';
 

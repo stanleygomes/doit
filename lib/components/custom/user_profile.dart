@@ -1,9 +1,9 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:doit/components/Spacing.dart';
-import 'package:doit/components/CAvatar.dart';
-import 'package:doit/components/Typography.dart';
+import 'package:doit/components/spacing.dart';
+import 'package:doit/components/avatar.dart';
+import 'package:doit/components/typography.dart';
 
 class UserProfile extends StatelessWidget {
   final String? name;

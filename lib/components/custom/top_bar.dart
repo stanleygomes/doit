@@ -1,10 +1,10 @@
-import 'package:doit/components/CNavigator.dart';
+import 'package:doit/components/navigator.dart';
 import 'package:doit/screens/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:doit/components/CAvatar.dart';
-import 'package:doit/components/Typography.dart';
+import 'package:doit/components/avatar.dart';
+import 'package:doit/components/typography.dart';
 
 class TopBar extends StatelessWidget {
   final String? title;

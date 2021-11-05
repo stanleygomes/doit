@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:doit/components/AppBarBack.dart';
-import 'package:doit/components/CardBasicText.dart';
+import 'package:doit/components/app_bar_back.dart';
+import 'package:doit/components/card_basic_text.dart';
 import 'package:doit/models/screen_arguments.dart';
 import 'package:doit/models/auth.dart';
 

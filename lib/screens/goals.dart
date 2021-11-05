@@ -1,9 +1,12 @@
-import 'package:doit/components/AppBarBack.dart';
-import 'package:doit/components/CardBasicText.dart';
+import 'package:doit/models/screen_arguments.dart';
+import 'package:doit/screens/goal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:doit/components/AppBarBack.dart';
+import 'package:doit/components/CNavigator.dart';
+import 'package:doit/components/CardBasicText.dart';
 import 'package:doit/components/Fab.dart';
 import 'package:doit/models/auth.dart';
 
@@ -23,7 +26,11 @@ class _GoalsScreenState extends State<GoalsScreen> {
     // var auth = context.watch<AuthModel>();
 
     _openGoal() {
-      print('Select goal');
+      CNavigator.stack(
+        context,
+        GoalScreen.routeName,
+        ScreenArguments(id: 'bom dia amigo'),
+      );
     }
 
     // return Scaffold(

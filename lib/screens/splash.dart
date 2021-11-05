@@ -1,4 +1,5 @@
 import 'package:doit/models/auth.dart';
+import 'package:doit/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
       authContext.user = user;
 
       this._enableButtons();
-      CNavigator.replace(context, 'home');
+      CNavigator.replace(context, HomeScreen.routeName);
     } catch (e) {
       print(e);
       CDialog.showOkDialog(context, 'Ops', 'Ocorreu um erro ao efetuar login.');
@@ -72,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await auth.create(null);
 
     this._enableButtons();
-    CNavigator.replace(context, 'home');
+    CNavigator.replace(context, HomeScreen.routeName);
   }
 
   @override

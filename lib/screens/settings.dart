@@ -1,3 +1,5 @@
+import 'package:doit/screens/privacy.dart';
+import 'package:doit/screens/splash.dart';
 import 'package:doit/services/auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +40,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _signOut() async {
       Auth auth = new Auth();
       await auth.signOut();
-      CNavigator.stack(context, 'splash');
+      CNavigator.stack(context, SplashScreen.routeName);
     }
 
     _goToPrivacy() {
-      CNavigator.stack(context, 'privacy');
+      CNavigator.stack(context, PrivacyScreen.routeName);
     }
 
     return Scaffold(

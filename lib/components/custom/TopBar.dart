@@ -1,4 +1,5 @@
 import 'package:doit/components/CNavigator.dart';
+import 'package:doit/screens/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,7 +27,7 @@ class TopBar extends StatelessWidget {
     }
 
     _goToSettings() {
-      CNavigator.stack(context, 'settings');
+      CNavigator.stack(context, SettingsScreen.routeName);
     }
 
     return Container(

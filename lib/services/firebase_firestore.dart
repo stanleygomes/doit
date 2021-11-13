@@ -1,29 +1,25 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doit/services/date_transform.dart';
+import 'package:doit/services/date_util.dart';
 
 class FirebaseFirestoreService {
   CollectionReference _getCollection(String collectionName) {
     return FirebaseFirestore.instance.collection(collectionName);
   }
 
-  // setUsuario
-  // setDtaCriacao
-  // setDtaAlteracao
-
-  Object _createDocument(
-    Map<String, dynamic> document,
-    String? userId,
-    String action,
-  ) {
+  Map<String, dynamic> _createDocument(
+      Map<String, dynamic> document, String? userId, String action,
+      [String? documentId]) {
     if (userId == null) {
       throw ('User ID is a required parameter!');
     }
 
+    if ((action == 'update' || action == 'delete') && documentId == null) {
+      throw ('Document ID is a required parameter for update or delete!');
+    }
+
     document['userId'] = userId;
-    String now = DateTransform.nowFormat();
+    String now = DateUtil.nowFormat();
 
     if (action == 'create') {
       document['createdAt'] = now;
@@ -59,10 +55,32 @@ class FirebaseFirestoreService {
     return completer.future;
   }
 
-  // passar o id do usuario como obrigatorio
+  Future<String?> update(
+    String collectionName,
+    Map<String, dynamic> document,
+    String documentId,
+    String? userId,
+  ) {
+    final completer = Completer<String>();
 
-  // create
-  // get
-  // update
-  // delete
+    try {
+      CollectionReference collection = _getCollection(collectionName);
+      Map<String, dynamic> doc = _createDocument(
+        document,
+        userId,
+        'update',
+        documentId,
+      );
+
+      collection.doc(documentId).update(doc).then((value) {
+        completer.complete(documentId);
+      }).catchError((error) {
+        completer.completeError('Failed to update document: $error');
+      });
+    } catch (error) {
+      completer.completeError('Failed to update document: $error');
+    }
+
+    return completer.future;
+  }
 }

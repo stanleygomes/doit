@@ -5,6 +5,7 @@ import 'package:doit/components/text_field.dart';
 import 'package:doit/config/theme.dart';
 import 'package:doit/models/goal.dart';
 import 'package:doit/services/firebase_firestore.dart';
+import 'package:doit/services/route_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -33,6 +34,7 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
     var auth = context.watch<AuthModel>();
+    var args = RouteUtil.routeParams(context);
     FirebaseFirestoreService firestore = FirebaseFirestoreService();
 
     _setGoalName(String? newName) {
@@ -69,17 +71,31 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
       });
     }
 
-    _update() {}
+    _update(Map<String, dynamic> goal, String id) {
+      firestore
+          .update(GoalModel.collectionName, goal, id, auth.user!.id)
+          .then((id) {
+        _postSubmit(t.yourGoalUpdated);
+      }).catchError((error) {
+        print(error);
+        _postSubmit(t.sorryOcurredAnError);
+      });
+    }
 
     _submitForm() {
       if (_formKey.currentState!.validate()) {
         _setSubmiting(true);
         Map<String, dynamic> goal = new GoalModel(
+          id: args.id,
           color: formColor!,
           name: formGoal,
         ).toJson();
 
-        _create(goal);
+        if (args.id != null) {
+          _update(goal, args.id!);
+        } else {
+          _create(goal);
+        }
       }
     }
 

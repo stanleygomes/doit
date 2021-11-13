@@ -18,5 +18,7 @@
   "createGoal": "Create goal",
   "goalName": "Goal name",
   "yourGoalCreated": "Your goal was created successfully!",
+  "yourGoalUpdated": "Your goal was updated successfully!",
+  "yourGoalDeleted": "Your goal was deleted successfully!",
   "sorryOcurredAnError": "Sorry, I got an error!"
 }

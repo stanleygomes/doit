@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class ColorTransform {
+class ColorUtil {
   static String toText(Color color) {
     var hexCode = '#${color.value.toRadixString(16).substring(2, 8)}';
     return hexCode;

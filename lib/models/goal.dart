@@ -1,4 +1,4 @@
-import 'package:doit/services/color_transform.dart';
+import 'package:doit/services/color_util.dart';
 import 'package:flutter/widgets.dart';
 
 class GoalModel {
@@ -18,7 +18,7 @@ class GoalModel {
     return {
       'id': id,
       'name': name,
-      'color': ColorTransform.toText(color),
+      'color': ColorUtil.toText(color),
     };
   }
 

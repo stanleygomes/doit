@@ -65,7 +65,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
     // );
 
     _createGoal() {
-      CNavigator.stack(context, GoalFormScreen.routeName);
+      // CNavigator.stack(context, GoalFormScreen.routeName);
+      CNavigator.stack(
+        context,
+        GoalFormScreen.routeName,
+        ScreenArguments(id: 'VRSWKN5uXgzxMLTlTfgx'),
+      );
     }
 
     return Scaffold(

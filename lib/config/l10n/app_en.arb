@@ -11,5 +11,12 @@
   "byStanley": "By Stanley",
   "privacyDisclaimer": "Your personal data and your privacy are very important. We do not share it with anyone. We keep your name, email and profile picture save by Google Firebase Cloud Services. We can't access your information. They are only used to enhance and customize your experience while using the app.",
   "shareAppMessage": "Doit! O app para te ajudar a resolver suas atividades.",
-  "myGoals": "My Goals"
+  "myGoals": "My Goals",
+  "requiredField": "This field is required.",
+  "save": "Save",
+  "pickColor": "Pick a color",
+  "createGoal": "Create goal",
+  "goalName": "Goal name",
+  "yourGoalCreated": "Your goal was created successfully!",
+  "sorryOcurredAnError": "Sorry, I got an error!"
 }

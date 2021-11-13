@@ -1,5 +1,7 @@
+import 'package:doit/config/theme.dart';
 import 'package:doit/models/screen_arguments.dart';
 import 'package:doit/screens/goal.dart';
+import 'package:doit/screens/goal_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -62,19 +64,9 @@ class _GoalsScreenState extends State<GoalsScreen> {
     //   ),
     // );
 
-    var cards = [
-      Colors.indigo,
-      Colors.indigo,
-      Colors.cyan,
-      Colors.teal,
-      Colors.purple,
-      Colors.orange,
-      Colors.red,
-      Colors.white,
-      Colors.black,
-      Colors.pink,
-      Colors.orange,
-    ];
+    _createGoal() {
+      CNavigator.stack(context, GoalFormScreen.routeName);
+    }
 
     return Scaffold(
       appBar: AppBarBack(
@@ -84,11 +76,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: cards.map(
+            children: materialColorList.map(
               (card) {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                   child: CardBasicText(
+                    textColor: Colors.white,
                     backgroundColor: card,
                     text: 'Viajar',
                     onPressed: _openGoal,
@@ -101,7 +94,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
       ),
       floatingActionButton: Fab(
         tooltip: 'tooltip',
-        onPressed: () {},
+        onPressed: _createGoal,
       ),
     );
   }

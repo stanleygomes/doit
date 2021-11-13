@@ -1,3 +1,4 @@
+import 'package:doit/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -31,10 +32,6 @@ class _GoalScreenState extends State<GoalScreen> {
       print('Select goal');
     }
 
-    var cards = [
-      Colors.indigo,
-    ];
-
     return Scaffold(
       appBar: AppBarBack(
         title: 'NOME AQUI',
@@ -43,18 +40,9 @@ class _GoalScreenState extends State<GoalScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: cards.map(
-              (card) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                  child: CardBasicText(
-                    backgroundColor: card,
-                    text: 'Viajar',
-                    onPressed: _openGoal,
-                  ),
-                );
-              },
-            ).toList(),
+            children: [
+              Text('aqui'),
+            ],
           ),
         ),
       ),

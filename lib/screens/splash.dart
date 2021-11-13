@@ -10,7 +10,7 @@ import 'package:doit/components/button.dart';
 import 'package:doit/components/dialog.dart';
 import 'package:doit/components/spacing.dart';
 import 'package:doit/components/typography.dart';
-import 'package:doit/services/firebase.dart';
+import 'package:doit/services/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
     this._disableButtons();
 
     Auth auth = new Auth();
-    FirebaseService service = new FirebaseService();
+    FirebaseAuthService service = new FirebaseAuthService();
 
     try {
       var googleUser = await service.signInwithGoogle();

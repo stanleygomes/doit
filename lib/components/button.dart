@@ -60,6 +60,6 @@ class Button extends StatelessWidget {
       );
     }
 
-    return Text('Wrong button parametrers!');
+    return Text('Wrong button parameters!');
   }
 }

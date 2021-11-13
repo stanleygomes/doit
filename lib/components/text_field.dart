@@ -9,6 +9,7 @@ class CTextField extends StatelessWidget {
   final bool? isPassword;
   final Function(String?)? onChanged;
   final String placeholder;
+  final TextEditingController? controller;
 
   CTextField({
     Key? key,
@@ -16,6 +17,7 @@ class CTextField extends StatelessWidget {
     this.keyboardType,
     this.isPassword,
     this.onChanged,
+    this.controller,
     required this.placeholder,
   }) : super(key: key);
 
@@ -57,6 +59,7 @@ class CTextField extends StatelessWidget {
       keyboardType: kType,
       onChanged: this.onChanged!,
       obscureText: isPassword == true,
+      controller: controller,
       decoration: InputDecoration(
         labelText: this.placeholder,
         labelStyle: TextStyle(

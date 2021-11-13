@@ -21,4 +21,8 @@ class CNavigator {
       arguments: arguments,
     );
   }
+
+  static void goBack(BuildContext context) {
+    Navigator.of(context).pop();
+  }
 }

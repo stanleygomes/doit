@@ -23,7 +23,7 @@ class UserModel {
     };
   }
 
-  fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.serverAuthCode = json['serverAuthCode'];
     this.email = json['email'];

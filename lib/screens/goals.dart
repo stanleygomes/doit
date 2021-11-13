@@ -1,7 +1,9 @@
-import 'package:doit/config/theme.dart';
+import 'package:doit/components/alert.dart';
+import 'package:doit/models/goal.dart';
 import 'package:doit/models/screen_arguments.dart';
 import 'package:doit/screens/goal.dart';
 import 'package:doit/screens/goal_form.dart';
+import 'package:doit/services/firebase_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -22,56 +24,51 @@ class GoalsScreen extends StatefulWidget {
 }
 
 class _GoalsScreenState extends State<GoalsScreen> {
+  FirebaseFirestoreService firestore = FirebaseFirestoreService();
+  List<GoalModel> goals = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    // var auth = context.watch<AuthModel>();
+    var auth = context.watch<AuthModel>();
 
-    _openGoal() {
+    _openGoal(String id) {
       CNavigator.stack(
         context,
         GoalScreen.routeName,
-        ScreenArguments(id: 'bom dia amigo'),
+        ScreenArguments(id: id),
       );
     }
-
-    // return Scaffold(
-    //   body: SafeArea(
-    //     child: Container(
-    //       height: 600,
-    //       child: ListView(
-    //         children: <Widget>[
-    //           Stack(
-    //             children: <Widget>[
-    //               Text('TITULO'),
-    //               SingleChildScrollView(
-    //                 child: Column(
-    //                   children: <Widget>[
-    //                     Text('LEFT            '),
-    //                     Text('LEFT            '),
-    //                     Text('LEFT            '),
-    //                     Text('LEFT            '),
-    //                     Text('LEFT            '),
-    //                     Text('LEFT            '),
-    //                   ],
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
 
     _createGoal() {
-      // CNavigator.stack(context, GoalFormScreen.routeName);
-      CNavigator.stack(
-        context,
-        GoalFormScreen.routeName,
-        ScreenArguments(id: 'VRSWKN5uXgzxMLTlTfgx'),
-      );
+      CNavigator.stack(context, GoalFormScreen.routeName);
     }
+
+    _updateGoalsList(List<GoalModel> docs) {
+      setState(() {
+        goals = docs;
+      });
+    }
+
+    _initScreen() {
+      firestore
+          .getDocumentsFromCollection(GoalModel.collectionName, auth.user!.id!)
+          .then((documents) {
+        var goals =
+            documents.map((document) => GoalModel.fromJson(document)).toList();
+        _updateGoalsList(goals);
+      }).catchError((error) {
+        print(error);
+        CAlert.showMessage(context, t.sorryOcurredAnError);
+      });
+    }
+
+    _initScreen();
 
     return Scaffold(
       appBar: AppBarBack(
@@ -81,15 +78,17 @@ class _GoalsScreenState extends State<GoalsScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: materialColorList.map(
-              (card) {
+            children: goals.map(
+              (goal) {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                   child: CardBasicText(
                     textColor: Colors.white,
-                    backgroundColor: card,
-                    text: 'Viajar',
-                    onPressed: _openGoal,
+                    backgroundColor: goal.color,
+                    text: goal.name,
+                    onPressed: () {
+                      _openGoal(goal.id!);
+                    },
                   ),
                 );
               },

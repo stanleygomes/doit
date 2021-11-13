@@ -3,6 +3,12 @@ import 'package:flutter/widgets.dart';
 
 class RouteUtil {
   static ScreenArguments routeParams(BuildContext context) {
-    return ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    var args = ModalRoute.of(context)!.settings.arguments;
+
+    if (args != null) {
+      return args as ScreenArguments;
+    }
+
+    return ScreenArguments();
   }
 }

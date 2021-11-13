@@ -1,6 +1,6 @@
 import 'package:doit/components/navigator.dart';
 import 'package:doit/screens/goals.dart';
-import 'package:doit/services/string_util.dart';
+import 'package:doit/utils/string.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';

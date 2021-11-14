@@ -1,5 +1,6 @@
 import 'package:doit/components/alert.dart';
 import 'package:doit/components/button.dart';
+import 'package:doit/components/dialog.dart';
 import 'package:doit/components/label_error.dart';
 import 'package:doit/components/navigator.dart';
 import 'package:doit/components/text_field.dart';
@@ -28,7 +29,6 @@ class GoalFormScreen extends StatefulWidget {
 class _GoalFormScreenState extends State<GoalFormScreen> {
   FirebaseFirestoreService firestore = FirebaseFirestoreService();
   final _formKey = GlobalKey<FormState>();
-  String formGoal = '';
   Color? formColor = Colors.cyan;
   bool isSubmiting = false;
 
@@ -38,19 +38,21 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
     var args = RouteUtil.routeParams(context);
     var t = AppLocalizations.of(context)!;
 
-    firestore
-        .getDocument(GoalModel.collectionName, 'VRSWKN5uXgzxMLTlTfgx')
-        .then((document) {
-      var goal = GoalModel.fromJson(document);
-      _nameController.text = goal.name;
+    if (args.id != null) {
+      firestore
+          .getDocument(GoalModel.collectionName, args.id!)
+          .then((document) {
+        var goal = GoalModel.fromJson(document);
+        _nameController.text = goal.name;
 
-      setState(() {
-        formColor = goal.color;
+        setState(() {
+          formColor = goal.color;
+        });
+      }).catchError((error) {
+        print(error);
+        CAlert.showMessage(context, t.sorryOcurredAnError);
       });
-    }).catchError((error) {
-      print(error);
-      CAlert.showMessage(context, t.sorryOcurredAnError);
-    });
+    }
   }
 
   @override
@@ -66,12 +68,6 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
     var t = AppLocalizations.of(context)!;
     var auth = context.watch<AuthModel>();
     var args = RouteUtil.routeParams(context);
-
-    _setGoalName(String? newName) {
-      setState(() {
-        formGoal = newName!;
-      });
-    }
 
     _setColor(Color color) {
       setState(() {
@@ -116,13 +112,27 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
       });
     }
 
+    _confirmDelete() {
+      print('deletado');
+    }
+
+    _delete() {
+      CDialog.showOkDialog(
+        context,
+        t.deleteGoal,
+        t.confirmDeleteGoal,
+        true,
+        _confirmDelete,
+      );
+    }
+
     _submitForm() {
       if (_formKey.currentState!.validate()) {
         _setSubmiting(true);
         Map<String, dynamic> goal = new GoalModel(
           id: args.id,
           color: formColor!,
-          name: formGoal,
+          name: _nameController.text,
         ).toJson();
 
         if (args.id != null) {
@@ -147,10 +157,10 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CTextField(
-                    placeholder: t.goalName,
-                    autofocus: true,
-                    onChanged: _setGoalName,
-                    controller: _nameController),
+                  placeholder: t.goalName,
+                  autofocus: true,
+                  controller: _nameController,
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 30),
                   child: Text(t.pickColor),
@@ -187,10 +197,21 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
                       ? LabelError(message: t.requiredField)
                       : null,
                 ),
-                Button(
-                  type: 'elevated',
-                  label: t.save,
-                  onPressed: this.isSubmiting == true ? null : _submitForm,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Button(
+                      type: 'elevated',
+                      label: t.save,
+                      onPressed: this.isSubmiting == true ? null : _submitForm,
+                    ),
+                    Button(
+                      type: 'elevated',
+                      label: t.delete,
+                      backgroundColorPrimary: Colors.red,
+                      onPressed: this.isSubmiting == true ? null : _delete,
+                    ),
+                  ],
                 ),
               ],
             ),

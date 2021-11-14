@@ -1,4 +1,11 @@
+import 'package:doit/components/alert.dart';
+import 'package:doit/components/fab.dart';
+import 'package:doit/components/navigator.dart';
 import 'package:doit/config/theme.dart';
+import 'package:doit/models/goal.dart';
+import 'package:doit/screens/goal_form.dart';
+import 'package:doit/services/firebase_firestore.dart';
+import 'package:doit/utils/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
@@ -18,23 +25,46 @@ class GoalScreen extends StatefulWidget {
 }
 
 class _GoalScreenState extends State<GoalScreen> {
+  FirebaseFirestoreService firestore = FirebaseFirestoreService();
+  String title = 'Carregando...';
+
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+    var args = RouteUtil.routeParams(context);
     // var auth = context.watch<AuthModel>();
-    var args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
 
-    print('#############');
-    print('args: ');
-    print(args.id);
+    _setTitle(String newTitle) {
+      setState(() {
+        title = newTitle;
+      });
+    }
 
-    _openGoal() {
-      print('Select goal');
+    _initScreen() {
+      firestore
+          .getDocument(GoalModel.collectionName, args.id!)
+          .then((document) {
+        var goal = GoalModel.fromJson(document);
+        _setTitle(goal.name);
+      }).catchError((error) {
+        print(error);
+        CAlert.showMessage(context, t.sorryOcurredAnError);
+      });
+    }
+
+    _initScreen();
+
+    _editGoal() {
+      CNavigator.stack(
+        context,
+        GoalFormScreen.routeName,
+        ScreenArguments(id: args.id),
+      );
     }
 
     return Scaffold(
       appBar: AppBarBack(
-        title: 'NOME AQUI',
+        title: this.title,
         fontWeight: 'bold',
       ),
       body: SafeArea(
@@ -45,6 +75,11 @@ class _GoalScreenState extends State<GoalScreen> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: Fab(
+        customIcon: 'edit',
+        tooltip: 'tooltip',
+        onPressed: _editGoal,
       ),
     );
   }

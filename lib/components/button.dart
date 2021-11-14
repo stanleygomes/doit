@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 class Button extends StatelessWidget {
   final String type;
   final String label;
+  final Color? backgroundColorPrimary;
   final bool? huge;
   final Function()? onPressed;
 
@@ -13,15 +14,20 @@ class Button extends StatelessWidget {
     required this.type,
     required this.label,
     required this.onPressed,
+    this.backgroundColorPrimary,
     this.huge = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundButtonColor = this.backgroundColorPrimary == null
+        ? colorSchemePrimary
+        : this.backgroundColorPrimary!;
+
     if (type == 'text') {
       return TextButton(
         style: TextButton.styleFrom(
-          primary: colorSchemePrimary,
+          primary: backgroundButtonColor,
           onSurface: colorSchemePrimaryLight,
         ),
         onPressed: onPressed,
@@ -30,7 +36,7 @@ class Button extends StatelessWidget {
     } else if (type == 'outlined') {
       return OutlinedButton(
         style: OutlinedButton.styleFrom(
-          primary: colorSchemePrimary,
+          primary: backgroundButtonColor,
           padding: EdgeInsets.symmetric(
             horizontal: huge == true ? 80 : 30,
             vertical: huge == true ? 20 : 15,
@@ -46,7 +52,7 @@ class Button extends StatelessWidget {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
           onPrimary: colorSchemeTextPrimary,
-          primary: colorSchemePrimary,
+          primary: backgroundButtonColor,
           padding: EdgeInsets.symmetric(
             horizontal: huge == true ? 80 : 30,
             vertical: huge == true ? 20 : 15,

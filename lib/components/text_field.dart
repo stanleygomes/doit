@@ -57,7 +57,7 @@ class CTextField extends StatelessWidget {
     return TextFormField(
       autofocus: this.autofocus != null ? this.autofocus! : false,
       keyboardType: kType,
-      onChanged: this.onChanged!,
+      onChanged: this.onChanged == null ? (e) => {} : this.onChanged!,
       obscureText: isPassword == true,
       controller: controller,
       decoration: InputDecoration(

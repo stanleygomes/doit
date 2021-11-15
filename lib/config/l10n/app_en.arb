@@ -18,6 +18,7 @@
   "cancel": "Cancel",
   "pickColor": "Pick a color",
   "createGoal": "Create goal",
+  "editGoal": "Edit your goal",
   "goalName": "Goal name",
   "yourGoalCreated": "Your goal was created successfully!",
   "yourGoalUpdated": "Your goal was updated successfully!",

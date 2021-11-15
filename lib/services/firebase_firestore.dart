@@ -7,7 +7,7 @@ class FirebaseFirestoreService {
     return FirebaseFirestore.instance.collection(collectionName);
   }
 
-  Map<String, dynamic> _createDocument(
+  Map<String, dynamic> _validate(
       Map<String, dynamic> document, String? userId, String action,
       [String? documentId]) {
     if (userId == null) {
@@ -49,7 +49,7 @@ class FirebaseFirestoreService {
 
     try {
       CollectionReference collection = _getCollection(collectionName);
-      Object doc = _createDocument(document, userId, 'create');
+      Object doc = _validate(document, userId, 'create');
 
       collection.add(doc).then((value) {
         completer.complete(value.id);
@@ -73,7 +73,7 @@ class FirebaseFirestoreService {
 
     try {
       CollectionReference collection = _getCollection(collectionName);
-      Map<String, dynamic> doc = _createDocument(
+      Map<String, dynamic> doc = _validate(
         document,
         userId,
         'update',
@@ -87,6 +87,34 @@ class FirebaseFirestoreService {
       });
     } catch (error) {
       completer.completeError('Failed to update document: $error');
+    }
+
+    return completer.future;
+  }
+
+  Future<bool> delete(
+    String collectionName,
+    String documentId,
+    String userId,
+  ) {
+    final completer = Completer<bool>();
+
+    try {
+      CollectionReference collection = _getCollection(collectionName);
+      // Map<String, dynamic> doc = _validate(
+      //   new Map<String, dynamic>(),
+      //   userId,
+      //   'delete',
+      //   documentId,
+      // );
+
+      collection.doc(documentId).delete().then((value) {
+        completer.complete(true);
+      }).catchError((error) {
+        completer.completeError('Failed to delete document: $error');
+      });
+    } catch (error) {
+      completer.completeError('Failed to delete document: $error');
     }
 
     return completer.future;

@@ -25,4 +25,9 @@ class CNavigator {
   static void goBack(BuildContext context) {
     Navigator.of(context).pop();
   }
+
+  static void goBackManyTimes(BuildContext context, int times) {
+    int count = 0;
+    Navigator.of(context).popUntil((_) => count++ >= times);
+  }
 }

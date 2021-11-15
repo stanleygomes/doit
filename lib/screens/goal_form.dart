@@ -6,6 +6,7 @@ import 'package:doit/components/navigator.dart';
 import 'package:doit/components/text_field.dart';
 import 'package:doit/config/theme.dart';
 import 'package:doit/models/goal.dart';
+import 'package:doit/screens/goals.dart';
 import 'package:doit/services/firebase_firestore.dart';
 import 'package:doit/utils/color.dart';
 import 'package:doit/utils/route.dart';
@@ -113,7 +114,15 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
     }
 
     _confirmDelete() {
-      print('deletado');
+      firestore
+          .delete(GoalModel.collectionName, args.id!, auth.user!.id!)
+          .then((status) {
+        _postSubmit(t.yourGoalDeleted, true);
+        CNavigator.goBackManyTimes(context, 2);
+      }).catchError((error) {
+        print(error);
+        _postSubmit(t.sorryOcurredAnError);
+      });
     }
 
     _delete() {
@@ -145,7 +154,7 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
 
     return Scaffold(
       appBar: AppBarBack(
-        title: t.createGoal,
+        title: args.id == null ? t.createGoal : t.editGoal,
         fontWeight: 'bold',
       ),
       body: SafeArea(
@@ -158,15 +167,15 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
               children: [
                 CTextField(
                   placeholder: t.goalName,
-                  autofocus: true,
+                  autofocus: args.id != null ? false : true,
                   controller: _nameController,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Text(t.pickColor),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -189,7 +198,7 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: 10,
                     bottom: 30,
                   ),

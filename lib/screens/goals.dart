@@ -1,4 +1,5 @@
 import 'package:doit/components/alert.dart';
+import 'package:doit/components/empty_state.dart';
 import 'package:doit/models/goal.dart';
 import 'package:doit/models/screen_arguments.dart';
 import 'package:doit/screens/goal.dart';
@@ -76,25 +77,27 @@ class _GoalsScreenState extends State<GoalsScreen> {
         fontWeight: 'bold',
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: goals.map(
-              (goal) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                  child: CardBasicText(
-                    textColor: Colors.white,
-                    backgroundColor: goal.color,
-                    text: goal.name,
-                    onPressed: () {
-                      _openGoal(goal.id!);
+        child: goals.length == 0
+            ? EmptyState(label: t.createFistGoal)
+            : SingleChildScrollView(
+                child: Column(
+                  children: goals.map(
+                    (goal) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                        child: CardBasicText(
+                          textColor: Colors.white,
+                          backgroundColor: goal.color,
+                          text: goal.name,
+                          onPressed: () {
+                            _openGoal(goal.id!);
+                          },
+                        ),
+                      );
                     },
-                  ),
-                );
-              },
-            ).toList(),
-          ),
-        ),
+                  ).toList(),
+                ),
+              ),
       ),
       floatingActionButton: Fab(
         tooltip: 'tooltip',

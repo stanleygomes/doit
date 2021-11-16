@@ -1,4 +1,6 @@
 import 'package:doit/models/screen_arguments.dart';
+import 'package:doit/screens/error404.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RouteUtil {
@@ -10,5 +12,12 @@ class RouteUtil {
     }
 
     return ScreenArguments();
+  }
+
+  static MaterialPageRoute getNotFoundPage(RouteSettings settings) {
+    return MaterialPageRoute<void>(
+      settings: settings,
+      builder: (BuildContext context) => Error404Screen(),
+    );
   }
 }

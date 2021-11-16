@@ -12,10 +12,12 @@
   "privacyDisclaimer": "Your personal data and your privacy are very important. We do not share it with anyone. We keep your name, email and profile picture save by Google Firebase Cloud Services. We can't access your information. They are only used to enhance and customize your experience while using the app.",
   "shareAppMessage": "Doit! O app para te ajudar a resolver suas atividades.",
   "myGoals": "My Goals",
+  "createFistGoal": "You can create goals by click the green button bellow!",
   "requiredField": "This field is required.",
   "save": "Save",
   "delete": "Delete",
   "cancel": "Cancel",
+  "allGoals": "All goals",
   "pickColor": "Pick a color",
   "createGoal": "Create goal",
   "editGoal": "Edit your goal",
@@ -25,5 +27,6 @@
   "yourGoalDeleted": "Your goal was deleted successfully!",
   "confirmDeleteGoal": "Are you sure? All the tasks of this goal will be lost",
   "deleteGoal": "Delete goal",
+  "myTasks": "My Tasks",
   "sorryOcurredAnError": "Sorry, I got an error!"
 }

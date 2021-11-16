@@ -1,3 +1,4 @@
+import 'package:doit/utils/route.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:doit/screens/splash.dart';
 import 'package:doit/services/auth.dart';
 import 'package:doit/screens/home.dart';
-import 'package:doit/screens/error404.dart';
 import 'package:doit/config/theme.dart';
 import 'package:doit/config/routes.dart';
 import 'package:doit/models/auth.dart';
@@ -68,12 +68,7 @@ class RootWidget extends StatelessWidget {
         theme: appTheme(),
         routes: routes,
         initialRoute: this.initialRoute,
-        onUnknownRoute: (RouteSettings settings) {
-          return MaterialPageRoute<void>(
-            settings: settings,
-            builder: (BuildContext context) => Error404Screen(),
-          );
-        },
+        onUnknownRoute: RouteUtil.getNotFoundPage,
       ),
     );
   }

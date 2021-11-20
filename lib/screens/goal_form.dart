@@ -214,11 +214,14 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
                       label: t.save,
                       onPressed: this.isSubmiting == true ? null : _submitForm,
                     ),
-                    Button(
-                      type: 'elevated',
-                      label: t.delete,
-                      backgroundColorPrimary: Colors.red,
-                      onPressed: this.isSubmiting == true ? null : _delete,
+                    Visibility(
+                      visible: args.id != null,
+                      child: Button(
+                        type: 'elevated',
+                        label: t.delete,
+                        backgroundColorPrimary: Colors.red,
+                        onPressed: this.isSubmiting == true ? null : _delete,
+                      ),
                     ),
                   ],
                 ),

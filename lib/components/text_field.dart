@@ -8,6 +8,7 @@ class CTextField extends StatelessWidget {
   final String? keyboardType;
   final bool? isPassword;
   final Function(String?)? onChanged;
+  final Function(String?)? onFieldSubmitted;
   final String placeholder;
   final TextEditingController? controller;
 
@@ -17,6 +18,7 @@ class CTextField extends StatelessWidget {
     this.keyboardType,
     this.isPassword,
     this.onChanged,
+    this.onFieldSubmitted,
     this.controller,
     required this.placeholder,
   }) : super(key: key);
@@ -58,6 +60,8 @@ class CTextField extends StatelessWidget {
       autofocus: this.autofocus != null ? this.autofocus! : false,
       keyboardType: kType,
       onChanged: this.onChanged == null ? (e) => {} : this.onChanged!,
+      onFieldSubmitted:
+          this.onFieldSubmitted == null ? (e) => {} : this.onFieldSubmitted!,
       obscureText: isPassword == true,
       controller: controller,
       decoration: InputDecoration(

@@ -26,7 +26,7 @@ class GoalsScreen extends StatefulWidget {
 
 class _GoalsScreenState extends State<GoalsScreen> {
   FirebaseFirestoreService firestore = FirebaseFirestoreService();
-  List<GoalModel> goals = [];
+  List<GoalModel> _goals = [];
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
 
     _updateGoalsList(List<GoalModel> docs) {
       setState(() {
-        goals = docs;
+        _goals = docs;
       });
     }
 
@@ -77,11 +77,11 @@ class _GoalsScreenState extends State<GoalsScreen> {
         fontWeight: 'bold',
       ),
       body: SafeArea(
-        child: goals.length == 0
+        child: _goals.length == 0
             ? EmptyState(label: t.createFistGoal)
             : SingleChildScrollView(
                 child: Column(
-                  children: goals.map(
+                  children: _goals.map(
                     (goal) {
                       return Padding(
                         padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),

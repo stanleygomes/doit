@@ -1,10 +1,10 @@
-import 'package:doit/utils/route.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:doit/utils/route.dart';
 import 'package:doit/screens/splash.dart';
 import 'package:doit/services/auth.dart';
 import 'package:doit/screens/home.dart';

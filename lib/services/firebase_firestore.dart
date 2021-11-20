@@ -140,9 +140,8 @@ class FirebaseFirestoreService {
   }
 
   Future<List<Map<String, dynamic>>> getDocumentsFromCollection(
-    String collectionName,
-    String? userId,
-  ) {
+      String collectionName, String? userId,
+      [String? collectionParent]) {
     final completer = Completer<List<Map<String, dynamic>>>();
 
     try {
@@ -152,7 +151,13 @@ class FirebaseFirestoreService {
         throw ('User ID is a required parameter!');
       }
 
-      collection.where('userId', isEqualTo: userId).get().then((snapshot) {
+      collection.where('userId', isEqualTo: userId);
+
+      if (collectionParent != null) {
+        collection.where('collection', isEqualTo: collectionParent);
+      }
+
+      collection.get().then((snapshot) {
         var docs = snapshot.docs.map((doc) => putIdDocument(doc)).toList();
         completer.complete(docs);
       }).catchError((error) {

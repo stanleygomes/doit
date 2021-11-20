@@ -28,5 +28,7 @@
   "confirmDeleteGoal": "Are you sure? All the tasks of this goal will be lost",
   "deleteGoal": "Delete goal",
   "myTasks": "My Tasks",
+  "tasks": "Tasks",
+  "typeHereYourTask": "Type here your task",
   "sorryOcurredAnError": "Sorry, I got an error!"
 }

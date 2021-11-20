@@ -5,12 +5,14 @@ class AppBarBack extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final String? fontWeight;
   final Color? buttonColor;
+  final List<Widget>? actions;
 
   AppBarBack({
     Key? key,
     this.title,
     this.fontWeight,
     this.buttonColor,
+    this.actions,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class AppBarBack extends StatelessWidget with PreferredSizeWidget {
       ),
       elevation: 0,
       title: titleWidget,
+      actions: actions,
     );
   }
 

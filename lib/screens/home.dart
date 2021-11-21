@@ -71,16 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    if (_goals.length > maxItensLength) {
-      goalsWidgetsUpdate.add(
-        GoalCard(
-          name: t.allGoals,
-          background: Colors.white,
-          textColor: Colors.black45,
-          onPressed: () => _openGoals(),
-        ),
-      );
-    }
+    goalsWidgetsUpdate.add(
+      GoalCard(
+        name: _goals.length > maxItensLength ? t.allGoals : t.createGoal,
+        background: Colors.white,
+        textColor: Colors.black45,
+        onPressed: () => _openGoals(),
+      ),
+    );
 
     setState(() {
       _goalsWidgets = goalsWidgetsUpdate;
@@ -123,13 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
     String userId = auth.user!.id!;
     String collectionId = '_default_$userId';
 
-    if (auth.taskList.length > 0) {
-      print('Ja tem: ');
-      print(auth.taskList[0].collection);
-    } else {
-      print('nao tem ainda!!');
-    }
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -164,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 15, right: 15),
+                padding: const EdgeInsets.only(top: 5, right: 15),
                 child: TaskList(
                   goalId: collectionId,
                   userId: userId,

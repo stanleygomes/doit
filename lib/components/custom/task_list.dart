@@ -106,8 +106,6 @@ class _TaskListState extends State<TaskList> {
       });
     }
 
-    print('filho');
-
     return SingleChildScrollView(
       child: Column(
         children: taskList.map((task) {

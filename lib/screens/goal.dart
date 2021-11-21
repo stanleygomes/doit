@@ -69,8 +69,6 @@ class _GoalScreenState extends State<GoalScreen> {
       );
     }
 
-    print('pai');
-
     return Scaffold(
       appBar: AppBarBack(
         title: this._title,

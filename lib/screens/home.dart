@@ -6,7 +6,6 @@ import 'package:doit/components/alert.dart';
 import 'package:doit/components/navigator.dart';
 import 'package:doit/models/goal.dart';
 import 'package:doit/models/screen_arguments.dart';
-import 'package:doit/models/task.dart';
 import 'package:doit/screens/goal.dart';
 import 'package:doit/screens/goal_form.dart';
 import 'package:doit/screens/goals.dart';
@@ -16,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:doit/components/fab.dart';
 import 'package:doit/components/custom/top_bar.dart';
 import 'package:doit/models/auth.dart';
 import 'package:doit/components/typography.dart';
@@ -32,8 +30,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   FirebaseFirestoreService firestore = FirebaseFirestoreService();
-  List<GoalModel> _goals = [];
-  List<Widget> _goalsWidgets = [];
 
   _openGoal(String id) {
     CNavigator.stack(
@@ -57,17 +53,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _getGoalWidgets(context) {
+  _getGoalWidgets(context, goals) {
     var t = AppLocalizations.of(context)!;
     List<Widget> goalsWidgetsUpdate = [];
     int maxItensLength = 5;
 
-    for (var i = 0; i < _goals.length; i++) {
+    for (var i = 0; i < goals.length; i++) {
       if (i >= maxItensLength) {
         break;
       }
 
-      GoalModel goal = _goals[i];
+      GoalModel goal = goals[i];
 
       goalsWidgetsUpdate.add(
         GoalCard(
@@ -78,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    if (_goals.length > maxItensLength) {
+    if (goals.length > maxItensLength) {
       goalsWidgetsUpdate.add(
         GoalCard(
           name: t.allGoals,
@@ -98,9 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    setState(() {
-      _goalsWidgets = goalsWidgetsUpdate;
-    });
+    return goalsWidgetsUpdate;
   }
 
   _initScreen(context) {
@@ -112,10 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         .then((documents) {
       var goals =
           documents.map((document) => GoalModel.fromJson(document)).toList();
-      setState(() {
-        _goals = goals;
-      });
-      _getGoalWidgets(context);
+      auth.setGoalList(goals);
     }).catchError((error) {
       print(error);
       CAlert.showMessage(context, t.sorryOcurredAnError);
@@ -138,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var userFistName = StringUtil.getFirstName(user?.displayName);
     String userId = auth.user!.id!;
     String collectionId = '_default_$userId';
+    var goalList = auth.goalList;
 
     return Scaffold(
       body: SafeArea(
@@ -157,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: _goalsWidgets,
+                  children: _getGoalWidgets(context, goalList),
                 ),
               ),
             ),

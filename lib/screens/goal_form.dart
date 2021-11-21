@@ -90,10 +90,13 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
       }
     }
 
-    _create(Map<String, dynamic> goal) {
+    _create(Map<String, dynamic> document) {
+      var goalModel = GoalModel.fromJson(document);
       firestore
-          .create(GoalModel.collectionName, goal, auth.user!.id)
+          .create(GoalModel.collectionName, document, auth.user!.id)
           .then((id) {
+        goalModel.id = id;
+        auth.addGoal(goalModel);
         _postSubmit(t.yourGoalCreated, true);
       }).catchError((error) {
         print(error);

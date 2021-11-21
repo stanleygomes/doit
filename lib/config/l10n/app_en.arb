@@ -30,5 +30,8 @@
   "myTasks": "My Tasks",
   "tasks": "Tasks",
   "typeHereYourTask": "Type here your task",
+  "yourTaskCreated": "Your task was created successfully!",
+  "yourTaskUpdated": "Your task was updated successfully!",
+  "yourTaskDeleted": "Your task was deleted successfully!",
   "sorryOcurredAnError": "Sorry, I got an error!"
 }

@@ -1,9 +1,11 @@
 import 'package:doit/components/alert.dart';
 import 'package:doit/components/bottom_modal.dart';
 import 'package:doit/components/fab.dart';
+import 'package:doit/models/screen_arguments.dart';
 import 'package:doit/components/navigator.dart';
 import 'package:doit/components/text_field.dart';
 import 'package:doit/models/task.dart';
+import 'package:doit/screens/goal.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:doit/services/firebase_firestore.dart';
 import 'package:doit/utils/route.dart';
@@ -41,6 +43,11 @@ class TaskCreate extends StatelessWidget {
           .then((id) {
         CNavigator.goBack(context);
         _taskInputController.text = '';
+        CNavigator.popAndPushNamed(
+          context,
+          GoalScreen.routeName,
+          ScreenArguments(id: args.id!),
+        );
       }).catchError((error) {
         print(error);
         CAlert.showMessage(context, t.sorryOcurredAnError);

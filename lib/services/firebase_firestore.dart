@@ -151,13 +151,17 @@ class FirebaseFirestoreService {
         throw ('User ID is a required parameter!');
       }
 
-      collection.where('userId', isEqualTo: userId);
+      Query<Object?> conditions;
 
       if (collectionParent != null) {
-        collection.where('collection', isEqualTo: collectionParent);
+        conditions = collection
+            .where('userId', isEqualTo: userId)
+            .where('collection', isEqualTo: collectionParent);
+      } else {
+        conditions = collection.where('userId', isEqualTo: userId);
       }
 
-      collection.get().then((snapshot) {
+      conditions.get().then((snapshot) {
         var docs = snapshot.docs.map((doc) => putIdDocument(doc)).toList();
         completer.complete(docs);
       }).catchError((error) {

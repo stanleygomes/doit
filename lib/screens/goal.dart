@@ -69,7 +69,7 @@ class _GoalScreenState extends State<GoalScreen> {
       );
     }
 
-    print('veio1');
+    print('pai');
 
     return Scaffold(
       appBar: AppBarBack(

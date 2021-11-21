@@ -6,7 +6,6 @@ import 'package:doit/components/navigator.dart';
 import 'package:doit/components/text_field.dart';
 import 'package:doit/config/theme.dart';
 import 'package:doit/models/goal.dart';
-import 'package:doit/screens/goals.dart';
 import 'package:doit/services/firebase_firestore.dart';
 import 'package:doit/utils/color.dart';
 import 'package:doit/utils/route.dart';

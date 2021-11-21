@@ -12,6 +12,15 @@ class CNavigator {
     );
   }
 
+  static void popAndPushNamed(BuildContext context, String url,
+      [ScreenArguments? arguments]) {
+    Navigator.popAndPushNamed(
+      context,
+      url,
+      arguments: arguments,
+    );
+  }
+
   static void replace(BuildContext context, String url,
       [ScreenArguments? arguments]) {
     Navigator.pushNamedAndRemoveUntil(

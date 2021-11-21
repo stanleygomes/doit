@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -37,7 +35,10 @@ class _TaskListState extends State<TaskList> {
 
     firestore
         .getDocumentsFromCollection(
-            TaskModel.collectionName, this.userId, this.goalId)
+      TaskModel.collectionName,
+      this.userId,
+      this.goalId,
+    )
         .then((documents) {
       var tasks =
           documents.map((document) => TaskModel.fromJson(document)).toList();
@@ -61,6 +62,8 @@ class _TaskListState extends State<TaskList> {
 
   @override
   Widget build(BuildContext context) {
+    var t = AppLocalizations.of(context)!;
+
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -75,7 +78,33 @@ class _TaskListState extends State<TaskList> {
       return colorSchemePrimary;
     }
 
-    _deleteTask() {}
+    _checkTask(TaskModel task, bool isChecked) {
+      task.checked = isChecked;
+      Map<String, dynamic> document = task.toJson();
+
+      firestore
+          .update(TaskModel.collectionName, document, task.id!, userId)
+          .then((status) {
+        this._initScreen(context);
+      }).catchError((error) {
+        print(error);
+        CAlert.showMessage(context, t.sorryOcurredAnError);
+      });
+
+      return isChecked;
+    }
+
+    _deleteTask(String taskId) {
+      firestore.delete(TaskModel.collectionName, taskId, userId).then((status) {
+        CAlert.showMessage(context, t.yourGoalDeleted);
+        this._initScreen(context);
+      }).catchError((error) {
+        print(error);
+        CAlert.showMessage(context, t.sorryOcurredAnError);
+      });
+    }
+
+    print('filho');
 
     return SingleChildScrollView(
       child: Column(
@@ -89,14 +118,15 @@ class _TaskListState extends State<TaskList> {
                     checkColor: Colors.white,
                     fillColor: MaterialStateProperty.resolveWith(getColor),
                     value: task.checked,
-                    onChanged: task.onChanged,
+                    onChanged: (bool? isChecked) =>
+                        _checkTask(task, isChecked!),
                   ),
                   Text(task.text),
                 ],
               ),
               InkWell(
                 radius: 5,
-                onTap: _deleteTask,
+                onTap: () => _deleteTask(task.id!),
                 child: Padding(
                   padding: const EdgeInsets.all(5),
                   child: Icon(

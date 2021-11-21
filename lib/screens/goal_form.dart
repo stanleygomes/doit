@@ -66,7 +66,7 @@ class _GoalFormScreenState extends State<GoalFormScreen> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    var auth = context.watch<AuthModel>();
+    var auth = Provider.of<AuthModel>(context, listen: true);
     var args = RouteUtil.routeParams(context);
 
     _setColor(Color color) {

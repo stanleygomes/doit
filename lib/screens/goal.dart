@@ -57,7 +57,7 @@ class _GoalScreenState extends State<GoalScreen> {
   @override
   Widget build(BuildContext context) {
     var args = RouteUtil.routeParams(context);
-    var auth = context.watch<AuthModel>();
+    var auth = Provider.of<AuthModel>(context, listen: true);
     String userId = auth.user!.id!;
     String collectionId = args.id!;
 
@@ -93,7 +93,7 @@ class _GoalScreenState extends State<GoalScreen> {
         ),
       ),
       floatingActionButton: TaskCreate(
-        collectionName: collectionId,
+        collectionId: collectionId,
         userId: userId,
       ),
     );

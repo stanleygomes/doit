@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await auth.create(user);
 
       final authContext = Provider.of<AuthModel>(context, listen: false);
-      authContext.user = user;
+      authContext.setUser(user);
 
       this._enableButtons();
       CNavigator.replace(context, HomeScreen.routeName);
@@ -79,7 +79,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    // var authContext = context.watch<AuthModel>();
 
     return Scaffold(
       body: SafeArea(

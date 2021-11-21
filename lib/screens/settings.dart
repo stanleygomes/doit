@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
-    var auth = context.watch<AuthModel>();
+    var auth = Provider.of<AuthModel>(context, listen: true);
     var user = auth.user;
 
     _shareApp() {

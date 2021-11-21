@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:doit/components/alert.dart';
 import 'package:doit/config/theme.dart';
 import 'package:doit/models/task.dart';
+import 'package:doit/models/auth.dart';
 import 'package:doit/services/firebase_firestore.dart';
 
 class TaskList extends StatefulWidget {
@@ -28,10 +30,11 @@ class _TaskListState extends State<TaskList> {
   _TaskListState(this.goalId, this.userId);
 
   FirebaseFirestoreService firestore = FirebaseFirestoreService();
-  List<TaskModel> _tasks = [];
 
   _initScreen(context) {
     var t = AppLocalizations.of(context)!;
+    var auth = Provider.of<AuthModel>(context, listen: false);
+    auth.setTaskList([]);
 
     firestore
         .getDocumentsFromCollection(
@@ -42,10 +45,7 @@ class _TaskListState extends State<TaskList> {
         .then((documents) {
       var tasks =
           documents.map((document) => TaskModel.fromJson(document)).toList();
-
-      setState(() {
-        _tasks = tasks;
-      });
+      auth.setTaskList(tasks);
     }).catchError((error) {
       print(error);
       CAlert.showMessage(context, t.sorryOcurredAnError);
@@ -63,6 +63,8 @@ class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+    var auth = Provider.of<AuthModel>(context, listen: true);
+    var taskList = auth.taskList;
 
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -108,7 +110,7 @@ class _TaskListState extends State<TaskList> {
 
     return SingleChildScrollView(
       child: Column(
-        children: _tasks.map((task) {
+        children: taskList.map((task) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

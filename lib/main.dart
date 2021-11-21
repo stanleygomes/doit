@@ -51,7 +51,7 @@ class RootWidget extends StatelessWidget {
         ChangeNotifierProxyProvider0<AuthModel>(
           create: (context) {
             var authModel = new AuthModel();
-            authModel.user = this.user;
+            authModel.setUser(this.user);
 
             return authModel;
           },

@@ -50,6 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  _openCreateGoal() {
+    CNavigator.stack(
+      context,
+      GoalFormScreen.routeName,
+    );
+  }
+
   _getGoalWidgets(context) {
     var t = AppLocalizations.of(context)!;
     List<Widget> goalsWidgetsUpdate = [];
@@ -71,14 +78,25 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    goalsWidgetsUpdate.add(
-      GoalCard(
-        name: _goals.length > maxItensLength ? t.allGoals : t.createGoal,
-        background: Colors.white,
-        textColor: Colors.black45,
-        onPressed: () => _openGoals(),
-      ),
-    );
+    if (_goals.length > maxItensLength) {
+      goalsWidgetsUpdate.add(
+        GoalCard(
+          name: t.allGoals,
+          background: Colors.white,
+          textColor: Colors.black45,
+          onPressed: () => _openGoals(),
+        ),
+      );
+    } else {
+      goalsWidgetsUpdate.add(
+        GoalCard(
+          name: t.createGoal,
+          background: Colors.white,
+          textColor: Colors.black45,
+          onPressed: () => _openCreateGoal(),
+        ),
+      );
+    }
 
     setState(() {
       _goalsWidgets = goalsWidgetsUpdate;
@@ -133,10 +151,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             TitleMin(
               label: t.myGoals,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: _goals.length == 0 ? Text(t.createFistGoal) : null,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10, left: 10, right: 10),

@@ -24,61 +24,66 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _isDisabledButtons = false;
-
-  void _disableButtons() {
-    setState(() {
-      _isDisabledButtons = true;
-    });
-  }
-
-  void _enableButtons() {
-    setState(() {
-      _isDisabledButtons = false;
-    });
-  }
-
-  _loginWithGoogle() async {
-    this._disableButtons();
-
-    Auth auth = new Auth();
-    FirebaseAuthService service = new FirebaseAuthService();
-
-    try {
-      var googleUser = await service.signInwithGoogle();
-      var user = UserModel(
-        id: googleUser?.id,
-        displayName: googleUser?.displayName,
-        email: googleUser?.email,
-        photoUrl: googleUser?.photoUrl,
-        serverAuthCode: googleUser?.serverAuthCode,
-      );
-
-      await auth.create(user);
-
-      final authContext = Provider.of<AuthModel>(context, listen: false);
-      authContext.setUser(user);
-
-      this._enableButtons();
-      CNavigator.replace(context, HomeScreen.routeName);
-    } catch (e) {
-      print(e);
-      CDialog.showOkDialog(context, 'Ops', 'Ocorreu um erro ao efetuar login.');
-    }
-  }
-
-  _skipLogin() async {
-    this._disableButtons();
-
-    Auth auth = new Auth();
-    await auth.create(null);
-
-    this._enableButtons();
-    CNavigator.replace(context, HomeScreen.routeName);
-  }
+  var _firebaseService = FirebaseAuthService();
+  var _auth = new AuthService();
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context)!;
+
+    void _disableButtons() {
+      setState(() {
+        _isDisabledButtons = true;
+      });
+    }
+
+    void _enableButtons() {
+      setState(() {
+        _isDisabledButtons = false;
+      });
+    }
+
+    _login(UserModel createdUser) async {
+      _disableButtons();
+      try {
+        await _auth.create(createdUser);
+
+        final authContext = Provider.of<AuthModel>(context, listen: false);
+        authContext.setUser(createdUser);
+
+        _enableButtons();
+        CNavigator.replace(context, HomeScreen.routeName);
+      } catch (e) {
+        print(e);
+        CDialog.showOkDialog(context, 'Ops', t.sorryOcurredAnError);
+      }
+    }
+
+    _loginWithGoogle() async {
+      var googleUser = await _firebaseService.signInWithGoogle();
+      var user = UserModel(
+        id: googleUser?.uid,
+        displayName: googleUser?.displayName,
+        email: googleUser?.email,
+        photoUrl: googleUser?.photoURL,
+        serverAuthCode: null,
+      );
+
+      _login(user);
+    }
+
+    _skipLogin() async {
+      var anonimousUser = await _firebaseService.signInAnonimously();
+      var user = UserModel(
+        id: anonimousUser?.uid,
+        displayName: '',
+        email: '',
+        photoUrl: null,
+        serverAuthCode: null,
+      );
+
+      _login(user);
+    }
 
     return Scaffold(
       body: SafeArea(

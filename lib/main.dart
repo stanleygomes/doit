@@ -17,9 +17,9 @@ main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  Auth auth = Auth();
-  bool completedIntro = await auth.didCompletedIntro();
-  UserModel? user = await auth.getUser();
+  var authService = AuthService();
+  bool completedIntro = await authService.didCompletedIntro();
+  UserModel? user = await authService.getUser();
   String initialRoute =
       completedIntro ? HomeScreen.routeName : SplashScreen.routeName;
 

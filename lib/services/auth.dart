@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:doit/models/user.dart';
 import 'package:doit/services/local_storage.dart';
 
-class Auth {
+class AuthService {
   final String completedIntroKey = 'completedIntro';
-  LocalStorageService _localStorageService = new LocalStorageService('auth');
+  var _localStorageService = new LocalStorageService('auth');
 
   Future<void> create(UserModel? user) async {
     if (user != null) {

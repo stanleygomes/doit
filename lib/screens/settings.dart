@@ -38,9 +38,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     _signOut() async {
-      Auth auth = new Auth();
-      await auth.signOut();
+      var authService = new AuthService();
+      await authService.signOut();
       CNavigator.stack(context, SplashScreen.routeName);
+      auth.setTaskList([]);
+      auth.setUser(null);
     }
 
     _goToPrivacy() {

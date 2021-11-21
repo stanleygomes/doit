@@ -44,6 +44,7 @@ class TaskCreate extends StatelessWidget {
           .then((id) {
         CNavigator.goBack(context);
         _taskInputController.text = '';
+        task.id = id;
         auth.addTask(task);
       }).catchError((error) {
         print(error);

@@ -7,10 +7,11 @@ Table of contents
 
  0. [Requirements](#requirements)
  1. [How to get Started](#startup)
- 2. [Gitflow recommendations](#gitflow)
- 3. [Patterns and libs](#patterns)
- 4. [Project structure](#projetcstructure)
- 5. [Licence](#license)
+ 2. [Build](#build)
+ 3. [Gitflow recommendations](#gitflow)
+ 4. [Patterns and libs](#patterns)
+ 5. [Project structure](#projetcstructure)
+ 6. [Licence](#license)
 *******
 
 <div id='requirements'/>
@@ -43,6 +44,15 @@ Make sure you have flutter extension package in your vscode editor, then you can
 
 Finally, you can choose a device or web to preview the app.
 
+<div id='build'/>
+
+## :rocket: Build
+
+Simply run:
+
+```
+flutter build appbundle
+```
 
 <div id='gitflow'/>
 

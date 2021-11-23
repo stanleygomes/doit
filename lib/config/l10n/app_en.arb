@@ -14,6 +14,7 @@
   "myGoals": "My Goals",
   "createFistGoal": "You can create goals by click the green button bellow!",
   "requiredField": "This field is required.",
+  "start": "Start",
   "save": "Save",
   "delete": "Delete",
   "cancel": "Cancel",

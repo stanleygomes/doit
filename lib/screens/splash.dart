@@ -111,20 +111,29 @@ class _SplashScreenState extends State<SplashScreen> {
                 value: 30,
                 child: Column(
                   children: [
+                    // CustomPadding(
+                    //   value: 15,
+                    //   child: Button(
+                    //     type: 'elevated',
+                    //     label: t.loginWithGoogle,
+                    //     huge: true,
+                    //     onPressed: _isDisabledButtons ? null : _loginWithGoogle,
+                    //   ),
+                    // ),
+                    // Button(
+                    //   type: 'outlined',
+                    //   label: t.notNow,
+                    //   huge: true,
+                    //   onPressed: _isDisabledButtons ? null : _skipLogin,
+                    // ),
                     CustomPadding(
                       value: 15,
                       child: Button(
                         type: 'elevated',
-                        label: t.loginWithGoogle,
+                        label: t.start,
                         huge: true,
-                        onPressed: _isDisabledButtons ? null : _loginWithGoogle,
+                        onPressed: _isDisabledButtons ? null : _skipLogin,
                       ),
-                    ),
-                    Button(
-                      type: 'outlined',
-                      label: t.notNow,
-                      huge: true,
-                      onPressed: _isDisabledButtons ? null : _skipLogin,
                     ),
                   ],
                 ),
